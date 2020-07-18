@@ -1,10 +1,10 @@
 import requests
 import json
-import re
+from vars import url
 
 
 def c(field_name):
-    raw_result = requests.get(url='https://jsonplaceholder.typicode.com/comments')
+    raw_result = requests.get(url=url+'comments')
     assert raw_result.status_code == 200
     response = json.loads(raw_result.text)
     result = {item[field_name] for item in response}
@@ -14,4 +14,3 @@ def c(field_name):
 def test_1():
     for item in c('email'):
         assert item.find("@") != -1 and item.find(".") != -1
-    # assert all(item.find("@") != -1 for item in c('email'))
